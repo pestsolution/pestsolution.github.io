@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CQRS Ultimate Analyzer</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <strong>CQRS Tracer Pro v2.0</strong> | Backend Lead Code Review Tool
+</header>
+
+<div id="configPanel"  style="display: none">
+
+    <label>
+        Pattern Config JSON
+    </label>
+
+    <textarea id="patternJson"></textarea>
+
+    <div>
+		<button onclick="savePatternConfig()" style="background:#27ae60;"> 💾 Save Config </button>
+    </div>
+</div>
+
+<div class="main-layout">
+    <div class="sidebar">
+        <h3>Control Panel</h3>
+		<button onclick="toggleConfigPanel()" style="background:#34495e;"> 👁 Show/Hide config</button>
+        <button class="btn-load" onclick="loadProject()">📁 1. Load Project Folder</button>
+        
+        <div>
+            <label style="font-size: 12px; font-weight: bold;">2. API Root Name:</label>
+            <input type="text" id="rootFileName" placeholder="e.g., CreateOrderCommand">
+        </div>
+        
+        <button class="btn-trace" id="btnTrace" onclick="traceDependency()" disabled>🚀 3. Trace Tree</button>
+        
+        <label style="font-size: 12px; font-weight: bold;">4. Dependency Structure:</label>
+        <textarea id="treeResult" placeholder="Dependency tree will appear here..."></textarea>
+        
+        <button class="btn-detail" id="btnDetail" onclick="analyzeDetail()" disabled>🔍 5. Deep Analysis (Impact)</button>
+    </div>
+
+    <div class="content-area">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tabTree')">🌳 Analysis Tree</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tabDB')">🗄️ DB Impact</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tabRecurly')">💳 Recurly</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tabVetspire')">🏥 Vetspire</button>			
+            <button class="tab-btn" onclick="switchTab(event, 'tabEZ')">🏥 EZ</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tabInternal')">⚙️ Internal Logic</button>
+			<button class="tab-btn" onclick="switchTab(event, 'tabAllCode')">📝 All Code</button>
+			<button class="tab-btn" onclick="switchTab(event, 'tabReview')">⚖️ Review Rule</button>
+        </div>
+
+        <div id="tabTree" class="tab-content active">No tree data available.</div>
+        <div id="tabDB" class="tab-content"></div>
+        <div id="tabRecurly" class="tab-content"></div>
+        <div id="tabVetspire" class="tab-content"></div>
+        <div id="tabEZ" class="tab-content"></div>
+        <div id="tabInternal" class="tab-content"></div>
+		<div id="tabAllCode" class="tab-content"></div>
+		<div id="tabReview" class="tab-content"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
